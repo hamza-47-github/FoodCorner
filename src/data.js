@@ -1,0 +1,298 @@
+// src/data.js
+export const categories = [
+    { id: 'all', name: 'All', icon: '🍽️' },
+    { id: 'burgers', name: 'Burgers', icon: '🍔' },
+    { id: 'pizza', name: 'Pizza', icon: '🍕' },
+    { id: 'biryani', name: 'Biryani', icon: '🍛' },
+    { id: 'karahi', name: 'Karahi', icon: '🥘' },
+    { id: 'bbq', name: 'BBQ', icon: '🍖' },
+    { id: 'desi', name: 'Desi Platters', icon: '🍗' },
+    { id: 'fastfood', name: 'Fast Food', icon: '🍟' },
+    { id: 'drinks', name: 'Drinks', icon: '🥤' },
+    { id: 'desserts', name: 'Desserts', icon: '🍰' },
+];
+
+export const foodItems = [
+    {
+        id: 1,
+        name: "Chicken Biryani",
+        description: "Aromatic basmati rice layered with spiced chicken, herbs, and fried onions.",
+        price: 350,
+        category: 'biryani',
+        rating: 4.8,
+        restaurantId: 1,
+        image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80"
+    },
+    {
+        id: 2,
+        name: "Beef Biryani",
+        description: "Tender beef cooked with saffron rice and traditional spices.",
+        price: 450,
+        category: 'biryani',
+        rating: 4.7,
+        restaurantId: 1,
+        image: "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=600&q=80"
+    },
+    {
+        id: 3,
+        name: "Chicken Karahi",
+        description: "Spicy chicken karahi cooked in a wok with tomatoes, ginger, and green chilies.",
+        price: 1200,
+        category: 'karahi',
+        rating: 4.9,
+        restaurantId: 2,
+        image: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=600&q=80"
+    },
+    {
+        id: 4,
+        name: "Mutton Karahi",
+        description: "Succulent mutton pieces in a rich, spicy tomato-based gravy.",
+        price: 1500,
+        category: 'karahi',
+        rating: 4.8,
+        restaurantId: 2,
+        image: "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=600&q=80"
+    },
+    {
+        id: 5,
+        name: "Chicken Tikka",
+        description: "Tender chicken pieces marinated in yogurt and spices, grilled to perfection.",
+        price: 400,
+        category: 'bbq',
+        rating: 4.6,
+        restaurantId: 3,
+        image: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=600&q=80"
+    },
+    {
+        id: 6,
+        name: "Seekh Kebab",
+        description: "Minced meat kebabs seasoned with herbs and spices, grilled on skewers.",
+        price: 350,
+        category: 'bbq',
+        rating: 4.7,
+        restaurantId: 3,
+        image: "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=600&q=80"
+    },
+    {
+        id: 7,
+        name: "Nihari",
+        description: "Slow-cooked beef shank in a rich, flavorful gravy served with naan.",
+        price: 500,
+        category: 'desi',
+        rating: 4.9,
+        restaurantId: 4,
+        image: "https://images.unsplash.com/photo-1574484284002-952d92456975?w=600&q=80"
+    },
+    {
+        id: 8,
+        name: "Haleem",
+        description: "Traditional wheat and meat slow-cooked to a thick, hearty consistency.",
+        price: 300,
+        category: 'desi',
+        rating: 4.6,
+        restaurantId: 4,
+        image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&q=80"
+    },
+    {
+        id: 9,
+        name: "Chicken Tikka Burger",
+        description: "Crispy chicken tikka patty with lettuce, mayo, and special sauce in a bun.",
+        price: 450,
+        category: 'fastfood',
+        rating: 4.5,
+        restaurantId: 5,
+        image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80"
+    },
+    {
+        id: 10,
+        name: "Crispy Fried Chicken",
+        description: "Golden crispy fried chicken pieces with secret spices.",
+        price: 550,
+        category: 'fastfood',
+        rating: 4.7,
+        restaurantId: 5,
+        image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=600&q=80"
+    },
+    {
+        id: 11,
+        name: "Chicken Tikka Pizza",
+        description: "Pizza topped with chicken tikka, onions, and mozzarella cheese.",
+        price: 1200,
+        category: 'pizza',
+        rating: 4.4,
+        restaurantId: 6,
+        image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80"
+    },
+    {
+        id: 12,
+        name: "Pepperoni Pizza",
+        description: "Classic pepperoni pizza with mozzarella and tomato sauce.",
+        price: 1100,
+        category: 'pizza',
+        rating: 4.3,
+        restaurantId: 6,
+        image: "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=600&q=80"
+    },
+    {
+        id: 13,
+        name: "Butter Chicken",
+        description: "Creamy tomato curry with tender chicken pieces, best with naan.",
+        price: 650,
+        category: 'desi',
+        rating: 4.8,
+        restaurantId: 3,
+        image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=600&q=80"
+    },
+    {
+        id: 14,
+        name: "Chapli Kebab",
+        description: "Spicy minced beef kebab from Peshawar, served with chutney.",
+        price: 300,
+        category: 'bbq',
+        rating: 4.6,
+        restaurantId: 2,
+        image: "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=600&q=80"
+    },
+    {
+        id: 15,
+        name: "Lassi",
+        description: "Traditional yogurt drink, sweet and refreshing.",
+        price: 150,
+        category: 'drinks',
+        rating: 4.5,
+        restaurantId: 1,
+        image: "https://images.unsplash.com/photo-1527661591475-527312dd65f5?w=600&q=80"
+    },
+    {
+        id: 16,
+        name: "Chai",
+        description: "Kashmiri pink tea, hot and aromatic.",
+        price: 80,
+        category: 'drinks',
+        rating: 4.7,
+        restaurantId: 4,
+        image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=600&q=80"
+    },
+    {
+        id: 17,
+        name: "Gulab Jamun",
+        description: "Soft milk-solid dumplings soaked in rose-flavored syrup.",
+        price: 200,
+        category: 'desserts',
+        rating: 4.6,
+        restaurantId: 3,
+        image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=600&q=80"
+    },
+    {
+        id: 18,
+        name: "Kheer",
+        description: "Traditional rice pudding with cardamom and nuts.",
+        price: 250,
+        category: 'desserts',
+        rating: 4.5,
+        restaurantId: 1,
+        image: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&q=80"
+    },
+    {
+        id: 19,
+        name: "Zinger Burger",
+        description: "Spicy crispy chicken fillet burger with lettuce and mayo.",
+        price: 500,
+        category: 'fastfood',
+        rating: 4.5,
+        restaurantId: 5,
+        image: "https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&q=80"
+    },
+    {
+        id: 20,
+        name: "Fries",
+        description: "Golden crispy salted fries.",
+        price: 200,
+        category: 'fastfood',
+        rating: 4.2,
+        restaurantId: 5,
+        image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=600&q=80"
+    },
+];
+
+export const restaurants = [
+    {
+        id: 1,
+        name: 'Biryani House Lahore',
+        description: 'Famous for authentic Lahori-style biryani and traditional desi food. Serves the best aromatic biryani in town.',
+        image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80',
+        deal: 'Free kheer with every biryani!',
+        rating: 4.7,
+        deliveryTime: '30-40 mins',
+        location: 'Gulberg, Lahore',
+        cuisine: 'Desi, Biryani',
+        priceRange: 'Rs. 300 - Rs. 800',
+    },
+    {
+        id: 2,
+        name: 'Karahi Point',
+        description: 'Premier destination for spicy karahi and BBQ. Fresh ingredients, traditional recipes passed down through generations.',
+        image: 'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=600&q=80',
+        deal: '20% off on first order!',
+        rating: 4.8,
+        deliveryTime: '25-35 mins',
+        location: 'DHA, Karachi',
+        cuisine: 'Karahi, BBQ',
+        priceRange: 'Rs. 500 - Rs. 1,800',
+    },
+    {
+        id: 3,
+        name: 'BBQ Tonight',
+        description: 'Premium BBQ restaurant serving finest tikkas, kebabs, and grilled meats. Perfect for family dinners.',
+        image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80',
+        deal: 'Buy 1 Get 1 Free on Tikka!',
+        rating: 4.6,
+        deliveryTime: '35-45 mins',
+        location: 'F-8, Islamabad',
+        cuisine: 'BBQ, Grilled',
+        priceRange: 'Rs. 400 - Rs. 1,500',
+    },
+    {
+        id: 4,
+        name: 'Nihari Corner',
+        description: 'Specialty Nihari and Haleem. Slow-cooked for 12 hours with secret spices. A true desi breakfast experience.',
+        image: 'https://images.unsplash.com/photo-1574484284002-952d92456975?w=600&q=80',
+        deal: 'Free chai with Nihari!',
+        rating: 4.9,
+        deliveryTime: '20-30 mins',
+        location: 'Old Lahore, Lahore',
+        cuisine: 'Nihari, Haleem',
+        priceRange: 'Rs. 300 - Rs. 600',
+    },
+    {
+        id: 5,
+        name: 'Crispy Crunch',
+        description: 'Modern fast-food joint serving crispy fried chicken, zinger burgers, and loaded fries. Best in town!',
+        image: 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=600&q=80',
+        deal: 'Family combo 25% off!',
+        rating: 4.5,
+        deliveryTime: '20-30 mins',
+        location: 'Saddar, Karachi',
+        cuisine: 'Fast Food',
+        priceRange: 'Rs. 200 - Rs. 800',
+    },
+    {
+        id: 6,
+        name: 'Pizza Max Pakistan',
+        description: 'Local favorite for desi-style pizzas. Try our famous chicken tikka pizza loaded with local flavors.',
+        image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80',
+        deal: 'Free drink with large pizza!',
+        rating: 4.4,
+        deliveryTime: '30-40 mins',
+        location: 'Johar Town, Lahore',
+        cuisine: 'Pizza, Fast Food',
+        priceRange: 'Rs. 500 - Rs. 1,500',
+    },
+];
+
+export const promoCodes = {
+    'WELCOME10': { type: 'percent', value: 10, description: '10% off your first order' },
+    'BIRYANI20': { type: 'percent', value: 20, description: '20% off all biryani', category: 'biryani' },
+    'FREESHIP': { type: 'fixed', value: 100, description: 'Rs. 100 off delivery fee' },
+    'DESI50': { type: 'fixed', value: 50, description: 'Rs. 50 off orders over Rs. 500' },
+};

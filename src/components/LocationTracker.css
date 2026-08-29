@@ -1,0 +1,58 @@
+/* src/components/LocationTracker.css */
+
+.location-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-tile {
+    padding: 1.1rem 1.25rem;
+    text-align: center;
+}
+
+.stat-tile span {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+}
+
+.stat-tile strong {
+    font-size: 1.15rem;
+    color: var(--text);
+    word-break: break-all;
+}
+
+.stat-tile strong.live {
+    color: var(--accent);
+}
+
+.map-card {
+    overflow: hidden;
+    border-radius: var(--radius-md);
+}
+
+.map-frame {
+    height: clamp(320px, 55vw, 480px);
+    width: 100%;
+}
+
+.map-loading {
+    height: clamp(320px, 55vw, 480px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+/* Dark-friendly leaflet popup */
+[data-theme='dark'] .leaflet-popup-content-wrapper,
+[data-theme='dark'] .leaflet-popup-tip {
+    background: var(--surface);
+    color: var(--text);
+}

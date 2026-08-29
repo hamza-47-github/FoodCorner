@@ -1,0 +1,160 @@
+/* src/Pages/History.css */
+
+.history-page {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.history-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.history-header h1 {
+    margin: 0 0 0.25rem;
+}
+
+.orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.order-card {
+    padding: 1.25rem;
+}
+
+.order-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+}
+
+.order-id-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.order-icon {
+    font-size: 1.3rem;
+    color: var(--primary);
+}
+
+.order-id-group strong {
+    display: block;
+    font-size: 1rem;
+    color: var(--text);
+}
+
+.order-date {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.order-status {
+    display: inline-block;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.status-confirmed {
+    background: rgba(99, 102, 241, 0.12);
+    color: var(--primary);
+}
+
+.status-preparing {
+    background: rgba(245, 158, 11, 0.12);
+    color: var(--warning);
+}
+
+.status-delivering {
+    background: rgba(236, 72, 153, 0.12);
+    color: #ec4899;
+}
+
+.status-delivered {
+    background: rgba(16, 185, 129, 0.12);
+    color: var(--accent);
+}
+
+.status-pending {
+    background: var(--surface-2);
+    color: var(--text-muted);
+}
+
+.order-items-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
+}
+
+.order-item-chip {
+    font-size: 0.8rem;
+    background: var(--surface-2);
+    color: var(--text-muted);
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+}
+
+.order-more {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    padding: 0.25rem 0.4rem;
+}
+
+.order-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px dashed var(--border);
+}
+
+.order-total {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.order-total strong {
+    font-size: 1.1rem;
+    color: var(--text);
+}
+
+.track-link {
+    text-decoration: none;
+    font-size: 0.88rem;
+    padding: 0.5rem 1rem;
+}
+
+@media (max-width: 576px) {
+    .order-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .order-card-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .track-link {
+        text-align: center;
+    }
+}

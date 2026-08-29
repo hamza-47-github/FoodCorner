@@ -1,38 +1,261 @@
-.App {
-  text-align: center;
+/* src/App.css — global theme-aware styles */
+
+main.container {
+  max-width: 1200px;
+  padding-bottom: 4rem;
 }
 
-.App-logo {
-  height: 40vmin;
+/* ---------- Headings ---------- */
+h1, h2, h3, h4 {
+  color: var(--text);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.section-title {
+  text-align: center;
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+  margin: 2.5rem 0 0.5rem;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 64px;
+  height: 4px;
+  margin: 12px auto 0;
+  border-radius: 999px;
+  background: var(--hero-gradient);
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  max-width: 640px;
+  margin: 0 auto 2rem;
+  line-height: 1.7;
+}
+
+/* ---------- Cards / surfaces ---------- */
+.surface-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.25s ease, box-shadow 0.25s ease,
+    background-color 0.35s ease, border-color 0.35s ease;
+}
+
+.surface-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ---------- Buttons ---------- */
+button,
+.btn-modern {
+  font-family: inherit;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease,
+    box-shadow 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-primary-modern {
+  background: var(--hero-gradient);
+  background-size: 150% 150%;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary-modern:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  filter: brightness(1.06);
+}
+
+.btn-outline-modern {
+  background: transparent;
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
+  padding: 0.65rem 1.25rem;
+  font-weight: 600;
+}
+
+.btn-outline-modern:hover {
+  background: var(--primary-soft);
+}
+
+.btn-danger-modern {
+  background: transparent;
+  color: var(--danger);
+  border: 1.5px solid var(--danger);
+  padding: 0.45rem 1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.btn-danger-modern:hover {
+  background: var(--danger);
+  color: #fff;
+}
+
+/* ---------- Forms ---------- */
+input,
+select,
+textarea {
+  font-family: inherit;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+}
+
+/* ---------- Utility ---------- */
+.price-tag {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 1.5rem;
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+}
+
+/* ---------- Bootstrap compatibility (force theme vars) ---------- */
+.card {
+  background-color: var(--surface) !important;
+  border-color: var(--border) !important;
+  color: var(--text);
+}
+
+.card-body,
+.list-group-item {
+  background-color: transparent;
+  color: var(--text);
+}
+
+.list-group-item {
+  border-color: var(--border) !important;
+}
+
+.bg-light,
+.bg-white {
+  background-color: var(--surface) !important;
+}
+
+.text-dark {
+  color: var(--text) !important;
+}
+
+.navbar-light .navbar-brand,
+.navbar-light .nav-link {
+  color: var(--text);
+}
+
+/* Toasts follow the active theme */
+.Toastify__toast {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.Toastify__close-button {
+  color: var(--text-muted);
+}
+
+/* ================= Animations ================= */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Page-level entrance */
+.home-page,
+.cart-page,
+.checkout-page,
+.weather-page,
+.prayer-page,
+.location-page,
+.calendar-page,
+.food-detail-container,
+.history-page,
+.tracking-page {
+  animation: fadeUp 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+/* Staggered children — add class="stagger" to any grid/list */
+.stagger > * {
+  animation: fadeUp 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.stagger > *:nth-child(1) { animation-delay: 0.04s; }
+.stagger > *:nth-child(2) { animation-delay: 0.09s; }
+.stagger > *:nth-child(3) { animation-delay: 0.14s; }
+.stagger > *:nth-child(4) { animation-delay: 0.19s; }
+.stagger > *:nth-child(5) { animation-delay: 0.24s; }
+.stagger > *:nth-child(6) { animation-delay: 0.29s; }
+.stagger > *:nth-child(7) { animation-delay: 0.34s; }
+.stagger > *:nth-child(8) { animation-delay: 0.39s; }
+.stagger > *:nth-child(9) { animation-delay: 0.44s; }
+.stagger > *:nth-child(10) { animation-delay: 0.49s; }
+
+/* Shine sweep on primary buttons */
+.btn-primary-modern {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary-modern::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.45),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left 0.55s ease;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btn-primary-modern:hover::after {
+  left: 130%;
 }

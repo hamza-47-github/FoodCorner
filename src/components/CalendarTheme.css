@@ -1,0 +1,119 @@
+/* src/components/CalendarTheme.css — theme-aware react-big-calendar */
+
+.calendar-card {
+    padding: 1rem;
+}
+
+.calendar-card .rbc-calendar {
+    background: transparent;
+    color: var(--text);
+    font-family: inherit;
+}
+
+/* Toolbar */
+.calendar-card .rbc-toolbar {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.calendar-card .rbc-toolbar button {
+    background: var(--surface-2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.calendar-card .rbc-toolbar button:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.calendar-card .rbc-toolbar button.rbc-active {
+    background: var(--hero-gradient);
+    color: #fff;
+    border: none;
+    box-shadow: none;
+}
+
+.calendar-card .rbc-toolbar-label {
+    font-weight: 700;
+    color: var(--text);
+}
+
+/* Grid */
+.calendar-card .rbc-month-view,
+.calendar-card .rbc-time-view,
+.calendar-card .rbc-agenda-view {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--surface);
+}
+
+.calendar-card .rbc-header,
+.calendar-card .rbc-day-bg,
+.calendar-card .rbc-offers-bg {
+    border-color: var(--border);
+}
+
+.calendar-card .rbc-header {
+    padding: 0.6rem 0;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    background: var(--surface-2);
+}
+
+.calendar-card .rbc-date-cell {
+    padding: 0.35rem 0.5rem 0;
+    font-size: 0.85rem;
+}
+
+.calendar-card .rbc-off-range-bg {
+    background: var(--surface-2);
+    opacity: 0.55;
+}
+
+.calendar-card .rbc-today {
+    background-color: var(--primary-soft);
+}
+
+.calendar-card .rbc-event {
+    background: var(--hero-gradient);
+    border: none;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 2px 6px;
+}
+
+.calendar-card .rbc-show-more {
+    color: var(--primary);
+    font-weight: 600;
+    background: transparent;
+}
+
+/* Agenda view */
+.calendar-card .rbc-agenda-view table.rbc-agenda-table {
+    border-color: var(--border);
+}
+
+.calendar-card .rbc-agenda-view td,
+.calendar-card .rbc-agenda-empty {
+    border-color: var(--border) !important;
+    color: var(--text);
+}
+
+.calendar-card .rbc-agenda-time-cell,
+.calendar-card .rbc-agenda-date-cell {
+    color: var(--text-muted);
+    padding: 0.65rem;
+}
+
+.calendar-card .rbc-agenda-cell {
+    padding: 0.65rem;
+}

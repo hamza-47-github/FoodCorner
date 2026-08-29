@@ -1,0 +1,434 @@
+/* src/Pages/Checkout.css */
+
+.checkout-layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.checkout-form {
+    padding: 1.5rem;
+}
+
+.checkout-form h2 {
+    font-size: 1.15rem;
+    margin: 0 0 1.25rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-field.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-field label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.form-field label svg {
+    color: var(--primary);
+    font-size: 0.85rem;
+}
+
+.form-field input {
+    font-size: 0.95rem;
+}
+
+.payment-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.payment-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.55rem 0.9rem;
+    border-radius: 999px;
+    background: var(--surface-2);
+    border: 1.5px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.payment-chip:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.payment-chip.active {
+    background: var(--primary-soft);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.payment-chip svg {
+    font-size: 0.9rem;
+}
+
+.checkout-items {
+    padding: 1.5rem;
+}
+
+.checkout-items h2,
+.checkout-summary h2 {
+    font-size: 1.15rem;
+    margin: 0 0 1rem;
+}
+
+.checkout-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px dashed var(--border);
+    color: var(--text-muted);
+}
+
+.checkout-row:last-child {
+    border-bottom: none;
+}
+
+.checkout-summary {
+    position: sticky;
+    top: 90px;
+    padding: 1.5rem;
+}
+
+.free-label {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.summary-cta {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+/* ================= Order success ================= */
+.order-success-head {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.success-icon {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #fff;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: var(--shadow-md);
+    animation: pop-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes pop-in {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.order-success-head h1 {
+    margin: 0 0 0.4rem;
+}
+
+.order-success-head p {
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* ---------- Receipt (invoice) ---------- */
+.receipt-wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    background: #ffffff;
+    color: #101828;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: clamp(1.25rem, 4vw, 2.5rem);
+}
+
+.receipt-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding-bottom: 1.25rem;
+    border-bottom: 2px solid #101828;
+}
+
+.receipt-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+.receipt-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #6366f1, #ec4899);
+    color: #fff;
+    font-size: 1.3rem;
+    box-shadow: 0 6px 14px rgba(99, 102, 241, 0.35);
+}
+
+.receipt-brand h2 {
+    margin: 0;
+    color: #101828;
+    font-size: 1.4rem;
+    letter-spacing: -0.02em;
+}
+
+.receipt-brand p {
+    margin: 0.15rem 0 0;
+    color: #667085;
+    font-size: 0.85rem;
+}
+
+.receipt-tick {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1.5px solid rgba(16, 185, 129, 0.45);
+    color: #059669;
+    font-weight: 800;
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.45rem 0.95rem;
+    border-radius: 999px;
+}
+
+.receipt-tick span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #10b981;
+    color: #fff;
+    font-size: 0.8rem;
+}
+
+.receipt-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    padding: 1.25rem 0;
+}
+
+.receipt-meta span {
+    display: block;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #667085;
+    margin-bottom: 0.25rem;
+}
+
+.receipt-meta strong {
+    font-size: 0.95rem;
+    color: #101828;
+}
+
+.receipt-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.5rem 0 1rem;
+}
+
+.receipt-table th {
+    text-align: left;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #667085;
+    padding: 0.6rem 0;
+    border-bottom: 2px solid #eaecf0;
+}
+
+.receipt-table td {
+    padding: 0.7rem 0;
+    border-bottom: 1px solid #eaecf0;
+    font-size: 0.95rem;
+}
+
+.col-price {
+    text-align: right;
+}
+
+.col-qty {
+    text-align: center;
+}
+
+.receipt-totals div {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.45rem 0;
+    color: #475467;
+    font-size: 0.95rem;
+}
+
+.receipt-totals .grand {
+    border-top: 2px solid #101828;
+    margin-top: 0.5rem;
+    padding-top: 0.85rem;
+    color: #101828;
+    font-weight: 800;
+    font-size: 1.15rem;
+}
+
+.receipt-totals .free {
+    color: #059669;
+    font-weight: 700;
+}
+
+.receipt-footer {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px dashed #d0d5dd;
+    text-align: center;
+}
+
+.receipt-barcode {
+    height: 42px;
+    max-width: 320px;
+    margin: 0 auto 0.4rem;
+    background: repeating-linear-gradient(
+        90deg,
+        #101828 0px, #101828 2px,
+        transparent 2px, transparent 5px,
+        #101828 5px, #101828 6px,
+        transparent 6px, transparent 10px
+    );
+    opacity: 0.85;
+}
+
+.barcode-no {
+    letter-spacing: 0.35em;
+    font-size: 0.8rem !important;
+    color: #667085;
+}
+
+.receipt-footer p {
+    margin: 0.3rem 0;
+    color: #667085;
+    font-size: 0.88rem;
+}
+
+.receipt-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+}
+
+.receipt-actions a {
+    text-decoration: none;
+    line-height: 1.4;
+}
+
+.btn-whatsapp {
+    background: #25d366 !important;
+}
+
+.btn-whatsapp:hover {
+    filter: brightness(1.1);
+}
+
+.discount-row {
+    color: var(--accent);
+}
+
+.discount-value {
+    font-weight: 700;
+}
+
+/* ================= Responsive ================= */
+@media (max-width: 768px) {
+    .checkout-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .checkout-summary {
+        position: static;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .receipt-meta {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .receipt-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .receipt-actions button,
+    .receipt-actions a {
+        text-align: center;
+    }
+}
+
+/* ================= Print ================= */
+@media print {
+    body {
+        background: #fff !important;
+        background-image: none !important;
+    }
+
+    body * {
+        visibility: hidden;
+    }
+
+    .receipt-wrap,
+    .receipt-wrap * {
+        visibility: visible;
+    }
+
+    .receipt-wrap {
+        position: absolute;
+        left: 0;
+        top: 24px;
+        width: calc(100% - 48px);
+        max-width: none;
+        box-shadow: none !important;
+        border: 1px solid #eaecf0;
+    }
+}

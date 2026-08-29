@@ -1,0 +1,240 @@
+/* src/Pages/OrderTracking.css */
+
+.tracking-page {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.tracking-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.tracking-id {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.tracking-id svg {
+    font-size: 1.6rem;
+    color: var(--primary);
+}
+
+.tracking-id h2 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.tracking-id p {
+    margin: 0.2rem 0 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.tracking-status-pill {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    background: var(--accent);
+    color: #fff;
+}
+
+/* Progress bar */
+.tracking-progress-wrap {
+    margin-bottom: 1.5rem;
+}
+
+.tracking-progress-bar {
+    height: 8px;
+    background: var(--surface-2);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+}
+
+.tracking-progress-fill {
+    height: 100%;
+    background: var(--hero-gradient);
+    border-radius: 999px;
+    transition: width 0.5s ease;
+}
+
+/* Steps */
+.tracking-steps {
+    display: grid;
+    gap: 1rem;
+}
+
+.tracking-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    opacity: 0.55;
+    transition: all 0.3s ease;
+}
+
+.tracking-step.completed {
+    opacity: 1;
+    border-color: var(--accent);
+    background: rgba(16, 185, 129, 0.04);
+}
+
+.tracking-step.current {
+    opacity: 1;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px var(--primary-soft);
+}
+
+.step-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--surface-2);
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.tracking-step.completed .step-icon-wrap {
+    background: var(--accent);
+    color: #fff;
+}
+
+.tracking-step.current .step-icon-wrap {
+    background: var(--primary);
+    color: #fff;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
+    50% { box-shadow: 0 0 0 12px rgba(99, 102, 241, 0); }
+}
+
+.step-info {
+    flex: 1;
+}
+
+.step-info strong {
+    display: block;
+    font-size: 0.95rem;
+    margin-bottom: 0.15rem;
+}
+
+.step-info p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.step-now {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--primary);
+    background: var(--primary-soft);
+    padding: 0.25rem 0.55rem;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+/* Details */
+.tracking-details {
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.tracking-details h3 {
+    margin: 0 0 1rem;
+    font-size: 1.05rem;
+}
+
+.tracking-items {
+    margin-bottom: 1rem;
+}
+
+.tracking-item-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.55rem 0;
+    border-bottom: 1px dashed var(--border);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.tracking-item-row:last-child {
+    border-bottom: none;
+}
+
+.tracking-totals div {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.4rem 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.tracking-totals .grand {
+    border-top: 2px solid var(--text);
+    margin-top: 0.4rem;
+    padding-top: 0.6rem;
+    color: var(--text);
+    font-weight: 800;
+    font-size: 1.05rem;
+}
+
+.tracking-customer {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--border);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.tracking-customer div {
+    margin-bottom: 0.35rem;
+}
+
+.tracking-customer strong {
+    color: var(--text);
+}
+
+/* Actions */
+.tracking-actions {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 576px) {
+    .tracking-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .tracking-step {
+        flex-wrap: wrap;
+    }
+
+    .step-now {
+        margin-left: auto;
+    }
+}
