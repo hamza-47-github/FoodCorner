@@ -1,6 +1,6 @@
 // src/pages/SalesReceipt.js
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { FaArrowLeft, FaPrint } from 'react-icons/fa';
 import { formatPKR } from '../utils/format';
 import './Sales.css';
@@ -11,10 +11,11 @@ const SALES_ORDERS_KEY = 'sales_orders';
 function SalesReceipt() {
     const { orderId } = useParams();
     const [order, setOrder] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (!localStorage.getItem(AUTH_KEY)) {
-            window.location.href = '/sales/login';
+            navigate('/sales/login');
             return;
         }
         try {
