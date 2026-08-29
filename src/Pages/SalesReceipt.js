@@ -25,7 +25,7 @@ function SalesReceipt() {
         } catch (e) {
             setOrder(null);
         }
-    }, [orderId]);
+    }, [orderId, navigate]);
 
     const handlePrint = () => {
         window.print();

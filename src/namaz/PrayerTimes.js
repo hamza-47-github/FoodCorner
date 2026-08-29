@@ -1,5 +1,5 @@
 // src/components/PrayerTimes.js
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import Clock from 'react-clock';
@@ -12,22 +12,7 @@ const PrayerTimes = () => {
     const [prayerTimes, setPrayerTimes] = useState({});
     const [city, setCity] = useState('Lahore');
 
-    useEffect(() => {
-        fetchPrayerTimes();
-    }, [city]);
-
-    const fetchPrayerTimes = async () => {
-        try {
-            const response = await axios.get(`https://api.aladhan.com/v1/timingsByCity?city=${city}&country=Pakistan&method=2`);
-            setPrayerTimes(response.data.data.timings);
-            scheduleAlarms(response.data.data.timings);
-        } catch (error) {
-            console.error(error);
-            toast.error('Failed to fetch prayer times');
-        }
-    };
-
-    const scheduleAlarms = (times) => {
+    const scheduleAlarms = useCallback((times) => {
         Object.entries(times).forEach(([key, time]) => {
             const date = new Date();
             const [hours, minutes] = time.split(':');
@@ -45,15 +30,30 @@ const PrayerTimes = () => {
                         body: `It's time for ${key}!`,
                     });
 
-                    const audio = new Audio('/8163_download_makkah_azan_1_ringtone.mp3');
+                    const audio = new Audio(`${process.env.PUBLIC_URL}/8163_download_makkah_azan_1_ringtone.mp3`);
                     audio.play().catch((error) => console.error('Error playing sound:', error));
                 }, delay);
             }
         });
-    };
+    }, []);
+
+    const fetchPrayerTimes = useCallback(async () => {
+        try {
+            const response = await axios.get(`https://api.aladhan.com/v1/timingsByCity?city=${city}&country=Pakistan&method=2`);
+            setPrayerTimes(response.data.data.timings);
+            scheduleAlarms(response.data.data.timings);
+        } catch (error) {
+            console.error(error);
+            toast.error('Failed to fetch prayer times');
+        }
+    }, [city, scheduleAlarms]);
+
+    useEffect(() => {
+        fetchPrayerTimes();
+    }, [fetchPrayerTimes]);
 
     const playSound = () => {
-        const audio = new Audio('/8163_download_makkah_azan_1_ringtone.mp3');
+        const audio = new Audio(`${process.env.PUBLIC_URL}/8163_download_makkah_azan_1_ringtone.mp3`);
         audio.play().catch((error) => console.error('Error playing sound:', error));
         toast.info('Alarm sound played!');
     };
