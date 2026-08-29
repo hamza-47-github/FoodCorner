@@ -65,10 +65,6 @@ function SalesLogin() {
                         </button>
                         {error && <div className="login-error">{error}</div>}
                     </form>
-
-                    <p style={{ marginTop: '1.5rem', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                        Demo: admin / admin123
-                    </p>
                 </div>
             </div>
         </div>
