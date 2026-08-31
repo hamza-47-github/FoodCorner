@@ -14,6 +14,7 @@ const NAV_LINKS = [
     { to: '/restaurant/tables', label: 'Tables', roles: null },
     { to: '/restaurant/orders', label: 'Active Orders', roles: null },
     { to: '/restaurant/kitchen', label: 'Kitchen', roles: ['Admin', 'Kitchen Staff'] },
+    { to: '/restaurant/menu', label: 'Menu', roles: ['Admin'] },
     { to: '/restaurant/history', label: 'Order History', roles: null }
 ];
 

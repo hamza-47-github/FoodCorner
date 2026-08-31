@@ -33,6 +33,7 @@ import RestaurantKitchen from './Pages/RestaurantKitchen';
 import RestaurantBilling from './Pages/RestaurantBilling';
 import RestaurantReceipt from './Pages/RestaurantReceipt';
 import RestaurantOrderHistory from './Pages/RestaurantOrderHistory';
+import RestaurantMenu from './Pages/RestaurantMenu';
 import RestaurantQueue from './Pages/RestaurantQueue';
 import { useTheme } from './theme/ThemeContext';
 
@@ -73,6 +74,7 @@ function App() {
           <Route path="/restaurant/kitchen" element={<RestaurantKitchen />} />
           <Route path="/restaurant/billing/:tableId" element={<RestaurantBilling />} />
           <Route path="/restaurant/receipt/:billId" element={<RestaurantReceipt />} />
+          <Route path="/restaurant/menu" element={<RestaurantMenu />} />
           <Route path="/restaurant/history" element={<RestaurantOrderHistory />} />
         </Routes>
       </Layout>

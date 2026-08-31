@@ -2,13 +2,20 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { FaLock, FaUserTie, FaStore, FaListOl } from 'react-icons/fa';
+import { FaLock, FaStore, FaListOl, FaUserTie, FaUtensils, FaFire, FaStoreAlt, FaUserLock } from 'react-icons/fa';
 import { setUser } from '../restaurant/restaurantActions';
 import { users } from '../restaurant/restaurantData';
 import '../restaurant/Restaurant.css';
 import './Sales.css';
 
 const RESTAURANT_USER_KEY = 'restaurant_user';
+
+const ROLE_ICONS = {
+    'Admin': <FaUserLock />,
+    'Waiter': <FaUtensils />,
+    'Kitchen Staff': <FaFire />,
+    'Cashier': <FaStoreAlt />
+};
 
 function RestaurantLogin() {
     const [username, setUsername] = useState('');
@@ -17,14 +24,18 @@ function RestaurantLogin() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const login = (found) => {
+        dispatch(setUser(found.id));
+        localStorage.setItem(RESTAURANT_USER_KEY, JSON.stringify(found));
+        navigate('/restaurant');
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         setError('');
         const found = users.find(u => u.username === username.trim() && u.password === password);
         if (found) {
-            dispatch(setUser(found.id));
-            localStorage.setItem(RESTAURANT_USER_KEY, JSON.stringify(found));
-            navigate('/restaurant');
+            login(found);
         } else {
             setError('Invalid username or password');
         }
@@ -70,14 +81,18 @@ function RestaurantLogin() {
                     </form>
 
                     <div className="login-roles">
-                        <p><FaUserTie /> Demo accounts:</p>
-                        <ul>
+                        <p><FaUserTie /> Quick login as:</p>
+                        <div className="quick-login-grid">
                             {users.map(u => (
-                                <li key={u.id}>
-                                    <strong>{u.name}</strong> — {u.role} ({u.username} / {u.password})
-                                </li>
+                                <button key={u.id} type="button" className="quick-login-btn" onClick={() => login(u)}>
+                                    <span className="quick-login-icon">{ROLE_ICONS[u.role] || <FaUserTie />}</span>
+                                    <span className="quick-login-meta">
+                                        <strong>{u.role}</strong>
+                                        <small>{u.username} / {u.password}</small>
+                                    </span>
+                                </button>
                             ))}
-                        </ul>
+                        </div>
                     </div>
 
                     <Link to="/restaurant/queue" className="btn-modern btn-outline-modern queue-login-link" style={{ width: '100%', textDecoration: 'none', lineHeight: '1.4' }}>

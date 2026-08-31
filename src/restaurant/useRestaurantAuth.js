@@ -55,7 +55,9 @@ export const PERMISSIONS = {
     kitchenWork: ['Kitchen Staff', 'Admin'],
     billing: ['Admin', 'Cashier'],
     payment: ['Admin', 'Cashier'],
-    history: ['Admin', 'Cashier']
+    history: ['Admin', 'Cashier'],
+    manageMenu: ['Admin'],
+    manageTables: ['Admin']
 };
 
 export const can = (user, perm) => {

@@ -216,6 +216,42 @@ function reducer(state = initialRestaurantState, action) {
         case 'RS_RESET_DEMO':
             return { ...initialRestaurantState };
 
+        // Admin: add a new menu item (appears everywhere: menu grid, billing, receipts).
+        case 'RS_ADD_MENU_ITEM': {
+            const { name, category, price, image } = action.payload || {};
+            if (!name || !name.trim() || !category || !category.trim() || !price || price <= 0) return state;
+            const id = `m${state.nextMenuId}`;
+            const item = {
+                id,
+                name: name.trim(),
+                category: category.trim(),
+                price,
+                image: (image && image.trim()) || '🍽️'
+            };
+            return {
+                ...state,
+                menuItems: [...state.menuItems, item],
+                nextMenuId: state.nextMenuId + 1
+            };
+        }
+
+        // Admin: remove a menu item (historical orders keep their own copies).
+        case 'RS_REMOVE_MENU_ITEM': {
+            return {
+                ...state,
+                menuItems: state.menuItems.filter(m => m.id !== action.itemId)
+            };
+        }
+
+        // Admin: add a new table to the dining floor.
+        case 'RS_ADD_TABLE': {
+            const number = state.tables.reduce((max, t) => Math.max(max, t.number), 0) + 1;
+            return {
+                ...state,
+                tables: [...state.tables, { id: `t${number}`, number, status: 'available', sessionId: null }]
+            };
+        }
+
         default:
             return state;
     }

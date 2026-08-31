@@ -183,5 +183,6 @@ export const initialRestaurantState = {
     receipts: [],
     nextOrderNumber: 1005,
     nextBillNumber: 1002,
-    nextReceiptNumber: 1001
+    nextReceiptNumber: 1001,
+    nextMenuId: 19
 };

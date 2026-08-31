@@ -3,12 +3,12 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { FaLock } from 'react-icons/fa';
+import { FaLock, FaPlus } from 'react-icons/fa';
 import { formatPKR } from '../utils/format';
 import RestaurantShell from '../restaurant/RestaurantShell';
 import { statusLabel, sessionRunningTotal, tableNonPaidOrders } from '../restaurant/restaurantSelectors';
 import { can } from '../restaurant/useRestaurantAuth';
-import { startBilling } from '../restaurant/restaurantActions';
+import { startBilling, addTable } from '../restaurant/restaurantActions';
 
 function RestaurantTables() {
     const restaurant = useSelector(state => state.restaurant);
@@ -19,6 +19,13 @@ function RestaurantTables() {
     const canTakeOrder = can(user, 'placeOrder');
     const canBill = can(user, 'billing');
     const canServe = can(user, 'serveOrder');
+    const canManageTables = can(user, 'manageTables');
+
+    const handleAddTable = () => {
+        const nextNo = restaurant.tables.reduce((max, t) => Math.max(max, t.number), 0) + 1;
+        dispatch(addTable());
+        toast.success(`Table ${nextNo} added to the dining floor.`);
+    };
 
     const handleBill = (tableId) => {
         const hasUnpaid = restaurant.bills.some(b => b.tableId === tableId && b.status === 'unpaid');
@@ -36,6 +43,14 @@ function RestaurantTables() {
 
     return (
         <RestaurantShell title="Restaurant Tables" subtitle="Select a table to take an order, serve, or start billing">
+            <div className="tables-header">
+                <span className="tables-count">{restaurant.tables.length} table(s)</span>
+                {canManageTables && (
+                    <button className="btn-modern btn-primary-modern" onClick={handleAddTable}>
+                        <FaPlus /> Add Table
+                    </button>
+                )}
+            </div>
             <div className="table-grid">
                 {restaurant.tables.map(table => {
                     const running = sessionRunningTotal(restaurant, table.id);
