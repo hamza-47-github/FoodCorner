@@ -24,6 +24,15 @@ import SalesReceipt from './Pages/SalesReceipt';
 import SalesMenu from './Pages/SalesMenu';
 import SalesReports from './Pages/SalesReports';
 import SalesHistory from './Pages/SalesHistory';
+import RestaurantLogin from './Pages/RestaurantLogin';
+import RestaurantHome from './Pages/RestaurantHome';
+import RestaurantTables from './Pages/RestaurantTables';
+import RestaurantTakeOrder from './Pages/RestaurantTakeOrder';
+import RestaurantOrders from './Pages/RestaurantOrders';
+import RestaurantKitchen from './Pages/RestaurantKitchen';
+import RestaurantBilling from './Pages/RestaurantBilling';
+import RestaurantReceipt from './Pages/RestaurantReceipt';
+import RestaurantOrderHistory from './Pages/RestaurantOrderHistory';
 import { useTheme } from './theme/ThemeContext';
 
 function ThemedToasts() {
@@ -54,6 +63,15 @@ function App() {
           <Route path="/sales/history" element={<SalesHistory />} />
           <Route path="/sales/menu" element={<SalesMenu />} />
           <Route path="/sales/reports" element={<SalesReports />} />
+          <Route path="/restaurant/login" element={<RestaurantLogin />} />
+          <Route path="/restaurant" element={<RestaurantHome />} />
+          <Route path="/restaurant/tables" element={<RestaurantTables />} />
+          <Route path="/restaurant/order/:tableId" element={<RestaurantTakeOrder />} />
+          <Route path="/restaurant/orders" element={<RestaurantOrders />} />
+          <Route path="/restaurant/kitchen" element={<RestaurantKitchen />} />
+          <Route path="/restaurant/billing/:tableId" element={<RestaurantBilling />} />
+          <Route path="/restaurant/receipt/:billId" element={<RestaurantReceipt />} />
+          <Route path="/restaurant/history" element={<RestaurantOrderHistory />} />
         </Routes>
       </Layout>
     </Router>

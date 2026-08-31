@@ -13,6 +13,7 @@ const navLinks = [
   { to: '/history', label: 'Order History' },
   { to: '/tracking', label: 'Track Order' },
   { to: '/sales/login', label: 'Sales' },
+  { to: '/restaurant/login', label: 'Restaurant' },
 ];
 
 const extraNavLinks = [

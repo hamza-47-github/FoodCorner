@@ -1,0 +1,588 @@
+/* src/restaurant/Restaurant.css */
+
+.restaurant-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem 1.25rem 3rem;
+}
+
+.restaurant-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+}
+
+.restaurant-header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+}
+
+.restaurant-header .section-subtitle {
+    margin: 0.15rem 0 0;
+    text-align: left;
+}
+
+.restaurant-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.restaurant-nav a {
+    text-decoration: none;
+    padding: 0.55rem 1rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    border: 1.5px solid var(--border);
+    transition: all 0.2s ease;
+}
+
+.restaurant-nav a:hover {
+    color: var(--primary);
+    border-color: var(--primary);
+    background: var(--primary-soft);
+}
+
+.restaurant-nav a.active {
+    color: #fff;
+    background: var(--hero-gradient);
+    border-color: transparent;
+}
+
+.restaurant-userbar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.user-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    background: var(--primary-soft);
+    border: 1px solid var(--border);
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--text);
+}
+
+.role-badge {
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: var(--hero-gradient);
+    color: #fff;
+}
+
+/* ---------- Login ---------- */
+.login-roles {
+    text-align: left;
+    background: var(--primary-soft);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 0.9rem 1rem;
+    margin: 1rem 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.login-roles p {
+    margin: 0 0 0.4rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.login-roles ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    font-size: 0.8rem;
+    line-height: 1.9;
+    color: var(--text-muted);
+}
+
+/* ---------- Stats ---------- */
+.rms-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.rms-stat {
+    padding: 1.15rem 1.25rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    background: var(--surface);
+}
+
+.rms-stat-value {
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.rms-stat-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+/* ---------- Tables grid ---------- */
+.table-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 1rem;
+}
+
+.table-card {
+    padding: 1.25rem 1rem;
+    text-align: center;
+    border-radius: var(--radius-md);
+    border: 2px solid var(--border);
+    background: var(--surface);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.table-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.table-card.tbl-available { border-color: #10b981; }
+.table-card.tbl-occupied { border-color: #64748b; }
+.table-card.tbl-order_pending { border-color: #f59e0b; }
+.table-card.tbl-preparing { border-color: #0ea5e9; }
+.table-card.tbl-ready { border-color: #8b5cf6; }
+.table-card.tbl-served { border-color: #14b8a6; }
+.table-card.tbl-billing { border-color: #ef4444; }
+
+.table-card-number {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.table-card .table-status {
+    display: inline-block;
+    margin-top: 0.4rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.tsk-available { background: rgba(16, 185, 129, 0.14); color: #10b981; }
+.tsk-occupied { background: rgba(100, 116, 139, 0.16); color: #64748b; }
+.tsk-order_pending { background: rgba(245, 158, 11, 0.16); color: #d97706; }
+.tsk-preparing { background: rgba(14, 165, 233, 0.16); color: #0284c7; }
+.tsk-ready { background: rgba(139, 92, 246, 0.16); color: #7c3aed; }
+.tsk-served { background: rgba(20, 184, 166, 0.16); color: #0d9488; }
+.tsk-billing { background: rgba(239, 68, 68, 0.16); color: #dc2626; }
+
+.table-card-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    margin-top: 0.9rem;
+}
+
+/* ---------- Menu / Take order ---------- */
+.category-chip {
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.category-chip:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.category-chip.active {
+    background: var(--hero-gradient);
+    border-color: transparent;
+    color: #fff;
+}
+
+.take-order-layout {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 1.25rem;
+    align-items: start;
+}
+
+.menu-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.85rem;
+}
+
+.menu-card {
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.menu-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.menu-card .menu-name {
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+}
+
+.menu-card .menu-price {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.cart-sheet {
+    position: sticky;
+    top: 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.15rem;
+    box-shadow: var(--shadow-md);
+}
+
+.cart-line {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.6rem;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.cart-line-name {
+    font-weight: 600;
+    font-size: 0.92rem;
+}
+
+.cart-line-note {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.cart-line-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.qty-stepper {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.qty-btn {
+    width: 26px;
+    height: 26px;
+    border-radius: 7px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    font-weight: 800;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.qty-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+.cart-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem 0;
+    font-weight: 600;
+}
+
+.cart-total-row.grand {
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+
+.order-input {
+    width: 100%;
+    margin-top: 0.6rem;
+}
+
+/* ---------- Kanban boards ---------- */
+.order-board {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    align-items: start;
+}
+
+.kanban-column {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+}
+
+.kanban-column h3 {
+    margin: 0 0 0.9rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.kanban-count {
+    background: var(--primary-soft);
+    color: var(--primary);
+    border-radius: 999px;
+    padding: 0.15rem 0.6rem;
+    font-size: 0.78rem;
+}
+
+.order-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 0.9rem;
+    margin-bottom: 0.8rem;
+    background: var(--surface);
+}
+
+.order-card-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 800;
+    margin-bottom: 0.4rem;
+}
+
+.order-card-table {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.order-card-items {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin-bottom: 0.6rem;
+}
+
+.order-card-note {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.order-card-footer {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.status-pill {
+    padding: 0.22rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.st-pending { background: rgba(245, 158, 11, 0.16); color: #d97706; }
+.st-processing { background: rgba(14, 165, 233, 0.16); color: #0284c7; }
+.st-ready { background: rgba(139, 92, 246, 0.16); color: #7c3aed; }
+.st-served { background: rgba(20, 184, 166, 0.16); color: #0d9488; }
+.st-billing { background: rgba(239, 68, 68, 0.16); color: #dc2626; }
+.st-paid { background: rgba(16, 185, 129, 0.16); color: #10b981; }
+
+/* ---------- Billing / receipt ---------- */
+.bill-layout {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 1.25rem;
+    align-items: start;
+}
+
+.receipt-paper {
+    background: #fff;
+    color: #101828;
+    border-radius: 12px;
+    padding: 1.5rem 1.75rem;
+    font-family: 'Courier New', Courier, monospace;
+    box-shadow: var(--shadow-md);
+    max-width: 420px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.receipt-paper .receipt-title {
+    text-align: center;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+}
+
+.receipt-paper .receipt-sub {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #475569;
+    margin: 0.15rem 0;
+}
+
+.receipt-line {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    font-size: 0.88rem;
+    padding: 0.25rem 0;
+    border-bottom: 1px dashed #d7dce5;
+}
+
+.receipt-line strong { font-weight: 700; }
+
+.receipt-rule {
+    border-top: 1px dashed #94a3b8;
+    margin: 0.6rem 0;
+}
+
+.receipt-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    font-weight: 800;
+    padding-top: 0.3rem;
+}
+
+.receipt-thanks {
+    text-align: center;
+    font-weight: 700;
+    margin-top: 0.8rem;
+    letter-spacing: 0.1em;
+    font-size: 0.85rem;
+}
+
+.bill-summary {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.15rem 1.25rem;
+}
+
+.payment-field {
+    margin-bottom: 0.9rem;
+}
+
+.payment-field label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 0.35rem;
+}
+
+.payment-methods {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.payment-method {
+    flex: 1;
+    padding: 0.65rem;
+    border-radius: var(--radius-sm);
+    border: 2px solid var(--border);
+    background: var(--surface);
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+}
+
+.payment-method.active {
+    border-color: var(--primary);
+    background: var(--primary-soft);
+    color: var(--primary);
+}
+
+.change-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.05rem;
+    font-weight: 800;
+    padding: 0.5rem 0;
+}
+
+.empty-note {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 2.5rem 1rem;
+    border: 1.5px dashed var(--border);
+    border-radius: var(--radius-md);
+}
+
+.history-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    margin-bottom: 0.6rem;
+    background: var(--surface);
+}
+
+@media (max-width: 992px) {
+    .take-order-layout,
+    .bill-layout {
+        grid-template-columns: 1fr;
+    }
+    .cart-sheet {
+        position: static;
+    }
+}

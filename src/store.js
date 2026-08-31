@@ -1,5 +1,7 @@
 // src/store.js
 import { createStore } from 'redux';
+import restaurantReducer from './restaurant/restaurantReducer';
+import { initialRestaurantState } from './restaurant/restaurantData';
 
 const initialState = {
     cart: {
@@ -18,10 +20,17 @@ const initialState = {
         notes: '',
         paymentMethod: 'Cash on Delivery'
     },
-    orderHistory: []
+    orderHistory: [],
+    restaurant: initialRestaurantState
 };
 
 function reducer(state = initialState, action) {
+    if (action.type && action.type.startsWith('RS_')) {
+        return {
+            ...state,
+            restaurant: restaurantReducer(state.restaurant, action)
+        };
+    }
     switch (action.type) {
         case 'ADD_TO_CART': {
             const food = action.food;
