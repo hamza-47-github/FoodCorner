@@ -11,7 +11,7 @@ import RestaurantShell from '../restaurant/RestaurantShell';
 import { addMenuItem, removeMenuItem } from '../restaurant/restaurantActions';
 import { can } from '../restaurant/useRestaurantAuth';
 import { menuByCategory } from '../restaurant/restaurantSelectors';
-import { CATEGORY_TONES } from '../restaurant/restaurantData';
+import MenuImg from '../restaurant/MenuImg';
 
 const EMOJI_QUICK = ['🍔', '🍕', '🍟', '🥤', '🍗', '🍢', '🥖', '🍰', '🍦', '🍽️', '🥗', '🍜'];
 
@@ -71,21 +71,21 @@ function RestaurantMenu() {
                     <div className="menu-grid">
                         {restaurant.menuItems.map(item => (
                             <div key={item.id} className="menu-card" style={{ cursor: 'default' }}>
-                                <div className="menu-thumb" style={{ background: CATEGORY_TONES[item.category] || 'var(--primary-soft)' }}>
-                                    {item.image}
-                                </div>
-                                <div className="menu-name">{item.name}</div>
-                                <div className="menu-price">{formatPKR(item.price)}</div>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '0 0.9rem' }}>
-                                    <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{item.category}</span>
-                                    <button
-                                        type="button"
-                                        className="qty-btn"
-                                        title="Remove item"
-                                        onClick={() => handleRemove(item)}
-                                    >
-                                        <FaTrashAlt style={{ fontSize: '0.68rem' }} />
-                                    </button>
+                                <MenuImg item={item} className="menu-img" />
+                                <div className="menu-body">
+                                    <div className="menu-name">{item.name}</div>
+                                    <div className="menu-price">{formatPKR(item.price)}</div>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                        <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{item.category}</span>
+                                        <button
+                                            type="button"
+                                            className="qty-btn"
+                                            title="Remove item"
+                                            onClick={() => handleRemove(item)}
+                                        >
+                                            <FaTrashAlt style={{ fontSize: '0.68rem' }} />
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         ))}

@@ -9,7 +9,7 @@ import RestaurantShell from '../restaurant/RestaurantShell';
 import { placeOrder } from '../restaurant/restaurantActions';
 import { can } from '../restaurant/useRestaurantAuth';
 import { menuByCategory, ordersForTable, orderStatusLabel } from '../restaurant/restaurantSelectors';
-import { CATEGORY_TONES } from '../restaurant/restaurantData';
+import MenuImg from '../restaurant/MenuImg';
 
 function RestaurantTakeOrder() {
     const { tableId } = useParams();
@@ -132,12 +132,12 @@ function RestaurantTakeOrder() {
                     <div className="menu-grid">
                         {items.map(item => (
                             <div key={item.id} className="menu-card" onClick={() => addItem(item)}>
-                                <div className="menu-thumb" style={{ background: CATEGORY_TONES[item.category] || 'var(--primary-soft)' }}>
-                                    {item.image}
+                                <MenuImg item={item} className="menu-img" />
+                                <div className="menu-body">
+                                    <div className="menu-name">{item.name}</div>
+                                    <div className="menu-price">{formatPKR(item.price)}</div>
+                                    <div className="menu-cat">{item.category}</div>
                                 </div>
-                                <div className="menu-name">{item.name}</div>
-                                <div className="menu-price">{formatPKR(item.price)}</div>
-                                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{item.category}</div>
                             </div>
                         ))}
                     </div>
