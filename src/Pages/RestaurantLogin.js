@@ -95,13 +95,14 @@ function RestaurantLogin() {
                         </div>
                     </div>
 
-                    <Link to="/restaurant/queue" className="btn-modern btn-outline-modern queue-login-link" style={{ width: '100%', textDecoration: 'none', lineHeight: '1.4' }}>
-                        <FaListOl /> View Live Order Queue — No Login Needed
-                    </Link>
-
-                    <Link to="/" className="btn-modern btn-outline-modern" style={{ width: '100%', textDecoration: 'none', lineHeight: '1.4' }}>
-                        Back to Website
-                    </Link>
+                    <div className="login-bottom-btns">
+                        <Link to="/restaurant/queue" className="btn-modern btn-outline-modern" style={{ textDecoration: 'none', lineHeight: '1.4' }}>
+                            <FaListOl /> View Live Order Queue — No Login Needed
+                        </Link>
+                        <Link to="/" className="btn-modern btn-outline-modern" style={{ textDecoration: 'none', lineHeight: '1.4' }}>
+                            Back to Website
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>

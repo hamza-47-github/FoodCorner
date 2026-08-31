@@ -317,6 +317,12 @@
 }
 
 /* ---------- Login / quick login ---------- */
+.login-bottom-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
 .quick-login-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -715,10 +721,6 @@
     font-weight: 700;
     font-size: 0.92rem;
     text-align: center;
-}
-
-.queue-login-link {
-    margin-top: 0.5rem;
 }
 
 .history-row {
