@@ -1,7 +1,8 @@
 // src/Pages/RestaurantTables.js
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { formatPKR } from '../utils/format';
 import RestaurantShell from '../restaurant/RestaurantShell';
 import { statusLabel, sessionRunningTotal, tableNonPaidOrders } from '../restaurant/restaurantSelectors';
@@ -20,7 +21,13 @@ function RestaurantTables() {
     const handleBill = (tableId) => {
         const hasUnpaid = restaurant.bills.some(b => b.tableId === tableId && b.status === 'unpaid');
         if (!hasUnpaid) {
-            dispatch(startBilling(tableId));
+            const served = restaurant.orders.filter(o => o.tableId === tableId && o.status === 'served');
+            if (served.length === 0) {
+                toast.info('No served orders yet — wait until a waiter marks orders as served.');
+            } else {
+                dispatch(startBilling(tableId));
+                toast.success('Bill generated — ready for payment.');
+            }
         }
         navigate(`/restaurant/billing/${tableId}`);
     };

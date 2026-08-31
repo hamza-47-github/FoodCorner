@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { FaUtensils } from 'react-icons/fa';
 import RestaurantShell from '../restaurant/RestaurantShell';
 import { serveOrder, startBilling } from '../restaurant/restaurantActions';
@@ -53,6 +54,7 @@ function RestaurantOrders() {
         const hasUnpaid = restaurant.bills.some(b => b.tableId === tableId && b.status === 'unpaid');
         if (!hasUnpaid) {
             dispatch(startBilling(tableId));
+            toast.success('Bill generated — ready for payment.');
         }
     };
 

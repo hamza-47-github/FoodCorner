@@ -33,6 +33,7 @@ import RestaurantKitchen from './Pages/RestaurantKitchen';
 import RestaurantBilling from './Pages/RestaurantBilling';
 import RestaurantReceipt from './Pages/RestaurantReceipt';
 import RestaurantOrderHistory from './Pages/RestaurantOrderHistory';
+import RestaurantQueue from './Pages/RestaurantQueue';
 import { useTheme } from './theme/ThemeContext';
 
 function ThemedToasts() {
@@ -64,6 +65,7 @@ function App() {
           <Route path="/sales/menu" element={<SalesMenu />} />
           <Route path="/sales/reports" element={<SalesReports />} />
           <Route path="/restaurant/login" element={<RestaurantLogin />} />
+          <Route path="/restaurant/queue" element={<RestaurantQueue />} />
           <Route path="/restaurant" element={<RestaurantHome />} />
           <Route path="/restaurant/tables" element={<RestaurantTables />} />
           <Route path="/restaurant/order/:tableId" element={<RestaurantTakeOrder />} />

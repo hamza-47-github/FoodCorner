@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { FaMoneyBillWave, FaCreditCard, FaCheckCircle, FaReceipt } from 'react-icons/fa';
 import { formatPKR } from '../utils/format';
 import RestaurantShell from '../restaurant/RestaurantShell';
@@ -55,21 +56,28 @@ function RestaurantBilling() {
 
     const handleGenerate = () => {
         dispatch(startBilling(tableId));
+        toast.success('Bill generated — ready for payment.');
     };
 
-    const receivedNum = parseInt(received || '0', 10);
+    const receivedNum = parseInt(received || '0', 10) || 0;
     const change = bill ? receivedNum - bill.total : 0;
-    const cashReady = bill && method === 'Cash' && receivedNum >= bill.total;
-    const cardReady = bill && method === 'Card';
 
     const handlePay = () => {
-        if (!bill) return;
-        if (method === 'Cash' && receivedNum < bill.total) return;
+        if (!bill) {
+            toast.error('No unpaid bill to complete. Generate a bill first.');
+            return;
+        }
+        if (method === 'Cash' && receivedNum < bill.total) {
+            const shortfall = bill.total - receivedNum;
+            toast.error(`Enter at least ${formatPKR(bill.total)} to complete payment (still need ${formatPKR(shortfall)}).`);
+            return;
+        }
         dispatch(payBill({
             billId: bill.id,
             method,
             received: method === 'Cash' ? receivedNum : bill.total
         }));
+        toast.success(`Payment of ${formatPKR(bill.total)} received — table ${table.number} is now free.`);
         navigate(`/restaurant/receipt/${bill.id}`);
     };
 
@@ -152,11 +160,15 @@ function RestaurantBilling() {
                                             <span>Change</span>
                                             <span>{receivedNum >= bill.total ? formatPKR(change) : formatPKR(0)}</span>
                                         </div>
+                                        {receivedNum > 0 && receivedNum < bill.total && (
+                                            <div style={{ fontSize: '0.8rem', fontWeight: 600, color: '#dc2626' }}>
+                                                Still need {formatPKR(bill.total - receivedNum)} to complete payment.
+                                            </div>
+                                        )}
                                     </div>
                                 )}
 
                                 <button className="btn-modern btn-primary-modern" style={{ width: '100%' }}
-                                    disabled={!(cashReady || cardReady)}
                                     onClick={handlePay}>
                                     <FaCheckCircle /> Complete Payment
                                 </button>

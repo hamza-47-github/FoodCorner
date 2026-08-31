@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { FaLock, FaUserTie, FaStore } from 'react-icons/fa';
+import { FaLock, FaUserTie, FaStore, FaListOl } from 'react-icons/fa';
 import { setUser } from '../restaurant/restaurantActions';
 import { users } from '../restaurant/restaurantData';
 import '../restaurant/Restaurant.css';
@@ -79,6 +79,10 @@ function RestaurantLogin() {
                             ))}
                         </ul>
                     </div>
+
+                    <Link to="/restaurant/queue" className="btn-modern btn-outline-modern queue-login-link" style={{ width: '100%', textDecoration: 'none', lineHeight: '1.4' }}>
+                        <FaListOl /> View Live Order Queue — No Login Needed
+                    </Link>
 
                     <Link to="/" className="btn-modern btn-outline-modern" style={{ width: '100%', textDecoration: 'none', lineHeight: '1.4' }}>
                         Back to Website

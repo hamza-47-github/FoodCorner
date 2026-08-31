@@ -27,10 +27,20 @@ function RestaurantReceipt() {
                 <Link to="/restaurant/tables" className="btn-modern btn-outline-modern" style={{ textDecoration: 'none', lineHeight: '1.4' }}>
                     <FaArrowLeft /> Back to Tables
                 </Link>
+                <Link to="/restaurant/queue" className="btn-modern btn-outline-modern" style={{ textDecoration: 'none', lineHeight: '1.4' }}>
+                    Order Queue
+                </Link>
                 {bill && bill.status === 'paid' && (
                     <span className="user-chip"><FaCheckCircle style={{ color: '#10b981' }} /> PAID</span>
                 )}
             </div>
+
+            {bill && bill.status === 'paid' && table && (
+                <div className="payment-done-banner">
+                    <FaCheckCircle /> Payment Complete — Table {table.number} is now free.
+                    Customers can watch new orders on the public Order Queue page.
+                </div>
+            )}
 
             {!bill || !payment ? (
                 <div className="empty-note">No receipt found for this bill.</div>

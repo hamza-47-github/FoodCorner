@@ -7,13 +7,14 @@ import { useTheme } from './theme/ThemeContext';
 import './Layout.css';
 
 const navLinks = [
-  { to: '/', label: 'Home' },
-  { to: '/cart', label: 'Cart' },
-  { to: '/checkout', label: 'Checkout' },
-  { to: '/history', label: 'Order History' },
-  { to: '/tracking', label: 'Track Order' },
-  { to: '/sales/login', label: 'Sales' },
+  // { to: '/', label: 'Home' },
+  // { to: '/cart', label: 'Cart' },
+  // { to: '/checkout', label: 'Checkout' },
+  // { to: '/history', label: 'Order History' },
+  // { to: '/tracking', label: 'Track Order' },
+  // { to: '/sales/login', label: 'Sales' },
   { to: '/restaurant/login', label: 'Restaurant' },
+  { to: '/restaurant/queue', label: 'Order Queue' },
 ];
 
 const extraNavLinks = [

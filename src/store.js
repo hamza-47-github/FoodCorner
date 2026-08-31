@@ -130,4 +130,14 @@ function reducer(state = initialState, action) {
 
 const store = createStore(reducer);
 
+// Persist the restaurant slice so the public Order Queue page (even in another
+// browser tab) can show live order/table status without requiring a login.
+store.subscribe(() => {
+    try {
+        window.localStorage.setItem('restaurant_snapshot', JSON.stringify(store.getState().restaurant));
+    } catch (e) {
+        // ignore storage errors (private mode / quota)
+    }
+});
+
 export default store;
