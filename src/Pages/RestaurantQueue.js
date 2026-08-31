@@ -9,12 +9,22 @@ import { initialRestaurantState } from '../restaurant/restaurantData';
 import { orderStatusLabel } from '../restaurant/restaurantSelectors';
 
 const SNAPSHOT_KEY = 'restaurant_snapshot';
+const PERSIST_KEY = 'foodcorner_state';
 
 const loadQueueState = () => {
     try {
-        const raw = window.localStorage.getItem(SNAPSHOT_KEY);
+        // Prefer the unified state key (full app persistence).
+        const raw = window.localStorage.getItem(PERSIST_KEY);
         if (raw) {
             const parsed = JSON.parse(raw);
+            if (parsed && parsed.restaurant && Array.isArray(parsed.restaurant.orders) && Array.isArray(parsed.restaurant.tables)) {
+                return parsed.restaurant;
+            }
+        }
+        // Fall back to the legacy snapshot key.
+        const rawLegacy = window.localStorage.getItem(SNAPSHOT_KEY);
+        if (rawLegacy) {
+            const parsed = JSON.parse(rawLegacy);
             if (parsed && Array.isArray(parsed.orders) && Array.isArray(parsed.tables)) {
                 return parsed;
             }
@@ -30,7 +40,7 @@ function useQueueState() {
 
     useEffect(() => {
         const onStorage = (e) => {
-            if (e.key === SNAPSHOT_KEY) {
+            if (e.key === SNAPSHOT_KEY || e.key === PERSIST_KEY) {
                 setRestaurant(loadQueueState());
             }
         };

@@ -3,28 +3,42 @@ import { createStore } from 'redux';
 import restaurantReducer from './restaurant/restaurantReducer';
 import { initialRestaurantState } from './restaurant/restaurantData';
 
+const PERSIST_KEY = 'foodcorner_state';
+
+// Rehydrate the full app from localStorage so every refresh keeps the demo
+// state intact — orders, bills, menus, tables, cart, delivery, promo.
+const loadPersistedState = () => {
+    try {
+        const raw = window.localStorage.getItem(PERSIST_KEY);
+        if (raw) {
+            const p = JSON.parse(raw);
+            if (p && p.restaurant && Array.isArray(p.restaurant.orders) && Array.isArray(p.restaurant.tables)) {
+                return {
+                    cart: { items: [], ...(p.cart || {}) },
+                    promo: { code: null, discount: 0, type: null, value: 0, ...(p.promo || {}) },
+                    delivery: { name: '', phone: '', address: '', notes: '', paymentMethod: 'Cash on Delivery', ...(p.delivery || {}) },
+                    orderHistory: Array.isArray(p.orderHistory) ? p.orderHistory : [],
+                    restaurant: p.restaurant
+                };
+            }
+        }
+    } catch (e) {
+        // corrupted storage — fall back to defaults
+    }
+    return null;
+};
+
 const initialState = {
-    cart: {
-        items: []
-    },
-    promo: {
-        code: null,
-        discount: 0,
-        type: null,
-        value: 0
-    },
-    delivery: {
-        name: '',
-        phone: '',
-        address: '',
-        notes: '',
-        paymentMethod: 'Cash on Delivery'
-    },
+    cart: { items: [] },
+    promo: { code: null, discount: 0, type: null, value: 0 },
+    delivery: { name: '', phone: '', address: '', notes: '', paymentMethod: 'Cash on Delivery' },
     orderHistory: [],
     restaurant: initialRestaurantState
 };
 
-function reducer(state = initialState, action) {
+const preloadedState = loadPersistedState() || initialState;
+
+function reducer(state = preloadedState, action) {
     if (action.type && action.type.startsWith('RS_')) {
         return {
             ...state,
@@ -128,13 +142,16 @@ function reducer(state = initialState, action) {
     }
 }
 
-const store = createStore(reducer);
+const store = createStore(reducer, preloadedState);
 
-// Persist the restaurant slice so the public Order Queue page (even in another
-// browser tab) can show live order/table status without requiring a login.
+// Persist the entire Redux state so everything survives page refresh and
+// multiple browser tabs share the same demo data for the whole day.
 store.subscribe(() => {
     try {
-        window.localStorage.setItem('restaurant_snapshot', JSON.stringify(store.getState().restaurant));
+        const state = store.getState();
+        window.localStorage.setItem(PERSIST_KEY, JSON.stringify(state));
+        // Keep restaurant_snapshot for backward compat with the public queue page
+        window.localStorage.setItem('restaurant_snapshot', JSON.stringify(state.restaurant));
     } catch (e) {
         // ignore storage errors (private mode / quota)
     }
