@@ -3,10 +3,11 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import { FaLock } from 'react-icons/fa';
 import { formatPKR } from '../utils/format';
 import RestaurantShell from '../restaurant/RestaurantShell';
 import { statusLabel, sessionRunningTotal, tableNonPaidOrders } from '../restaurant/restaurantSelectors';
-import { hasRole } from '../restaurant/useRestaurantAuth';
+import { can } from '../restaurant/useRestaurantAuth';
 import { startBilling } from '../restaurant/restaurantActions';
 
 function RestaurantTables() {
@@ -15,8 +16,9 @@ function RestaurantTables() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const canTakeOrder = hasRole(user, ['Admin', 'Waiter']);
-    const canBill = hasRole(user, ['Admin', 'Cashier']);
+    const canTakeOrder = can(user, 'placeOrder');
+    const canBill = can(user, 'billing');
+    const canServe = can(user, 'serveOrder');
 
     const handleBill = (tableId) => {
         const hasUnpaid = restaurant.bills.some(b => b.tableId === tableId && b.status === 'unpaid');
@@ -55,12 +57,12 @@ function RestaurantTables() {
                                         Take Order
                                     </Link>
                                 )}
-                                {(table.status === 'order_pending' || table.status === 'preparing' || table.status === 'ready' || table.status === 'served') && (
+                                {(table.status === 'order_pending' || table.status === 'preparing' || table.status === 'ready' || table.status === 'served') && canTakeOrder && (
                                     <Link to={`/restaurant/order/${table.id}`} className="btn-modern btn-outline-modern" style={{ textDecoration: 'none', lineHeight: '1.4' }}>
                                         + Add Order
                                     </Link>
                                 )}
-                                {(table.status === 'ready') && (
+                                {(table.status === 'ready') && canServe && (
                                     <Link to={`/restaurant/orders`} className="btn-modern btn-outline-modern" style={{ textDecoration: 'none', lineHeight: '1.4' }}>
                                         Serve
                                     </Link>
@@ -69,6 +71,12 @@ function RestaurantTables() {
                                     <button className="btn-modern btn-primary-modern" onClick={() => handleBill(table.id)}>
                                         {table.status === 'billing' ? 'View Bill' : 'Generate Bill'}
                                     </button>
+                                )}
+                                {!canTakeOrder && table.status !== 'available' && table.status !== 'billing' && (
+                                    <span className="table-role-note"><FaLock /> Waiter serves this table</span>
+                                )}
+                                {!canBill && (table.status === 'served' || table.status === 'billing') && (
+                                    <span className="table-role-note"><FaLock /> Cashier handles the bill</span>
                                 )}
                             </div>
                         </div>

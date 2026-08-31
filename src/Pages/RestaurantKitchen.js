@@ -1,10 +1,11 @@
 // src/Pages/RestaurantKitchen.js
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { FaPlay, FaCheckCircle } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { FaPlay, FaCheckCircle, FaLock } from 'react-icons/fa';
 import RestaurantShell from '../restaurant/RestaurantShell';
 import { kitchenStart, kitchenReady } from '../restaurant/restaurantActions';
+import { can } from '../restaurant/useRestaurantAuth';
 import { orderStatusLabel } from '../restaurant/restaurantSelectors';
 
 const COLUMNS = [
@@ -14,7 +15,24 @@ const COLUMNS = [
 
 function RestaurantKitchen() {
     const restaurant = useSelector(state => state.restaurant);
+    const user = useSelector(state => state.restaurant.currentUser);
     const dispatch = useDispatch();
+
+    if (!can(user, 'kitchenWork')) {
+        return (
+            <RestaurantShell title="Kitchen Display" subtitle="Role permissions">
+                <div className="empty-note">
+                    <div style={{ fontSize: '2rem', marginBottom: '0.4rem' }}><FaLock /></div>
+                    Only <strong>Kitchen Staff</strong> can update the kitchen display.
+                    <div style={{ marginTop: '0.9rem' }}>
+                        <Link to="/restaurant/login" className="btn-modern btn-primary-modern" style={{ textDecoration: 'none', lineHeight: '1.4' }}>
+                            Login as Kitchen Staff
+                        </Link>
+                    </div>
+                </div>
+            </RestaurantShell>
+        );
+    }
 
     const handleStart = (order) => dispatch(kitchenStart(order.id));
     const handleReady = (order) => dispatch(kitchenReady(order.id));

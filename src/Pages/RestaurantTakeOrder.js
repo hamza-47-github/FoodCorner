@@ -2,11 +2,14 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { FaPlus, FaMinus, FaTrashAlt, FaCheckCircle } from 'react-icons/fa';
+import { toast } from 'react-toastify';
+import { FaPlus, FaMinus, FaTrashAlt, FaCheckCircle, FaLock } from 'react-icons/fa';
 import { formatPKR } from '../utils/format';
 import RestaurantShell from '../restaurant/RestaurantShell';
 import { placeOrder } from '../restaurant/restaurantActions';
-import { menuByCategory, ordersForTable } from '../restaurant/restaurantSelectors';
+import { can } from '../restaurant/useRestaurantAuth';
+import { menuByCategory, ordersForTable, orderStatusLabel } from '../restaurant/restaurantSelectors';
+import { CATEGORY_TONES } from '../restaurant/restaurantData';
 
 function RestaurantTakeOrder() {
     const { tableId } = useParams();
@@ -23,6 +26,22 @@ function RestaurantTakeOrder() {
         return (
             <RestaurantShell title="Take Order">
                 <div className="empty-note">Table not found.</div>
+            </RestaurantShell>
+        );
+    }
+
+    if (!can(user, 'placeOrder')) {
+        return (
+            <RestaurantShell title={`Take Order — Table ${table.number}`} subtitle="Role permissions">
+                <div className="empty-note">
+                    <div style={{ fontSize: '2rem', marginBottom: '0.4rem' }}><FaLock /></div>
+                    Only the <strong>Waiter</strong> role can place orders.
+                    <div style={{ marginTop: '0.9rem' }}>
+                        <Link to="/restaurant/login" className="btn-modern btn-primary-modern" style={{ textDecoration: 'none', lineHeight: '1.4' }}>
+                            Login as Waiter
+                        </Link>
+                    </div>
+                </div>
             </RestaurantShell>
         );
     }
@@ -59,7 +78,7 @@ function RestaurantTakeOrder() {
     };
 
     const subtotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
-    const existingOrders = ordersForTable(restaurant, tableId);
+    const existingOrders = ordersForTable(restaurant, tableId).filter(o => o.status !== 'paid');
 
     const handlePlaceOrder = () => {
         if (cart.length === 0) return;
@@ -70,8 +89,12 @@ function RestaurantTakeOrder() {
             qty: i.qty,
             notes: i.notes.trim()
         }));
+        const nextNumber = restaurant.nextOrderNumber;
         dispatch(placeOrder({ tableId, items, waiter: user.name }));
         setCart([]);
+        toast.success(existingOrders.length > 0
+            ? `Order #${nextNumber} added to table ${table.number} — sent to kitchen.`
+            : `Order #${nextNumber} placed for table ${table.number} — sent to kitchen.`);
         navigate('/restaurant/orders');
     };
 
@@ -79,12 +102,16 @@ function RestaurantTakeOrder() {
         <RestaurantShell title={`Take Order — Table ${table.number}`} subtitle="Add items, quantities and notes, then place the order">
             {existingOrders.length > 0 && (
                 <div className="bill-summary" style={{ marginBottom: '1rem' }}>
-                    <strong>Existing order(s) on this table:</strong>
+                    <strong>Active session — Order{existingOrders.length > 1 ? 's' : ''} on this table:</strong>
                     {existingOrders.map(o => (
                         <div key={o.id} style={{ fontSize: '0.85rem', marginTop: '0.35rem' }}>
-                            #{o.number} · {o.status} · {o.items.map(i => `${i.name} x${i.qty}`).join(', ')}
+                            <span className={`status-pill st-${o.status}`} style={{ marginRight: '0.4rem' }}>{orderStatusLabel(o.status)}</span>
+                            #{o.number} · {o.items.map(i => `${i.name} x${i.qty}`).join(', ')}
                         </div>
                     ))}
+                    <div className="session-note">
+                        Customer wants more? New items are placed as a new kitchen order and combined into the same bill.
+                    </div>
                     <div style={{ marginTop: '0.5rem' }}><Link to="/restaurant/tables" className="btn-modern btn-outline-modern" style={{ textDecoration: 'none', lineHeight: '1.4' }}>Back to Tables</Link></div>
                 </div>
             )}
@@ -105,6 +132,9 @@ function RestaurantTakeOrder() {
                     <div className="menu-grid">
                         {items.map(item => (
                             <div key={item.id} className="menu-card" onClick={() => addItem(item)}>
+                                <div className="menu-thumb" style={{ background: CATEGORY_TONES[item.category] || 'var(--primary-soft)' }}>
+                                    {item.image}
+                                </div>
                                 <div className="menu-name">{item.name}</div>
                                 <div className="menu-price">{formatPKR(item.price)}</div>
                                 <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{item.category}</div>

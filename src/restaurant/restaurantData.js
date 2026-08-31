@@ -37,31 +37,40 @@ export const tables = Array.from({ length: 8 }, (_, i) => ({
     sessionId: null
 }));
 
+export const CATEGORY_TONES = {
+    Burgers: 'linear-gradient(135deg, #f59e0b, #f97316)',
+    Pizza: 'linear-gradient(135deg, #ef4444, #f97316)',
+    Drinks: 'linear-gradient(135deg, #06b6d4, #3b82f6)',
+    Fries: 'linear-gradient(135deg, #facc15, #f59e0b)',
+    BBQ: 'linear-gradient(135deg, #ea580c, #dc2626)',
+    Extras: 'linear-gradient(135deg, #a78bfa, #6366f1)'
+};
+
 export const menuItems = [
     // Burgers
-    { id: 'm1', name: 'Chicken Burger', category: 'Burgers', price: 650 },
-    { id: 'm2', name: 'Zinger Burger', category: 'Burgers', price: 750 },
-    { id: 'm3', name: 'Beef Burger', category: 'Burgers', price: 700 },
+    { id: 'm1', name: 'Chicken Burger', category: 'Burgers', price: 650, image: '🍔' },
+    { id: 'm2', name: 'Zinger Burger', category: 'Burgers', price: 750, image: '🍔' },
+    { id: 'm3', name: 'Beef Burger', category: 'Burgers', price: 700, image: '🍔' },
     // Pizza
-    { id: 'm4', name: 'Chicken Pizza', category: 'Pizza', price: 1200 },
-    { id: 'm5', name: 'Cheese Pizza', category: 'Pizza', price: 1100 },
-    { id: 'm6', name: 'Veggie Pizza', category: 'Pizza', price: 1000 },
-    { id: 'm7', name: 'BBQ Chicken Pizza', category: 'Pizza', price: 1350 },
+    { id: 'm4', name: 'Chicken Pizza', category: 'Pizza', price: 1200, image: '🍕' },
+    { id: 'm5', name: 'Cheese Pizza', category: 'Pizza', price: 1100, image: '🍕' },
+    { id: 'm6', name: 'Veggie Pizza', category: 'Pizza', price: 1000, image: '🍕' },
+    { id: 'm7', name: 'BBQ Chicken Pizza', category: 'Pizza', price: 1350, image: '🍕' },
     // Drinks
-    { id: 'm8', name: 'Coke', category: 'Drinks', price: 150 },
-    { id: 'm9', name: 'Sprite', category: 'Drinks', price: 150 },
-    { id: 'm10', name: 'Water', category: 'Drinks', price: 100 },
-    { id: 'm11', name: 'Fresh Juice', category: 'Drinks', price: 350 },
+    { id: 'm8', name: 'Coke', category: 'Drinks', price: 150, image: '🥤' },
+    { id: 'm9', name: 'Sprite', category: 'Drinks', price: 150, image: '🥤' },
+    { id: 'm10', name: 'Water', category: 'Drinks', price: 100, image: '💧' },
+    { id: 'm11', name: 'Fresh Juice', category: 'Drinks', price: 350, image: '🧃' },
     // Fries
-    { id: 'm12', name: 'Regular Fries', category: 'Fries', price: 350 },
-    { id: 'm13', name: 'Loaded Fries', category: 'Fries', price: 550 },
+    { id: 'm12', name: 'Regular Fries', category: 'Fries', price: 350, image: '🍟' },
+    { id: 'm13', name: 'Loaded Fries', category: 'Fries', price: 550, image: '🍟' },
     // BBQ
-    { id: 'm14', name: 'Chicken Tikka', category: 'BBQ', price: 950 },
-    { id: 'm15', name: 'Seekh Kabab', category: 'BBQ', price: 800 },
+    { id: 'm14', name: 'Chicken Tikka', category: 'BBQ', price: 950, image: '🍗' },
+    { id: 'm15', name: 'Seekh Kabab', category: 'BBQ', price: 800, image: '🍢' },
     // Extras
-    { id: 'm16', name: 'Garlic Bread', category: 'Extras', price: 400 },
-    { id: 'm17', name: 'Brownie', category: 'Extras', price: 450 },
-    { id: 'm18', name: 'Ice Cream', category: 'Extras', price: 300 }
+    { id: 'm16', name: 'Garlic Bread', category: 'Extras', price: 400, image: '🥖' },
+    { id: 'm17', name: 'Brownie', category: 'Extras', price: 450, image: '🍫' },
+    { id: 'm18', name: 'Ice Cream', category: 'Extras', price: 300, image: '🍦' }
 ];
 
 // --- Sample live data (used on first load so the demo has content) ---

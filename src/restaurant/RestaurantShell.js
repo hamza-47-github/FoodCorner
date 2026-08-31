@@ -1,6 +1,6 @@
 // src/restaurant/RestaurantShell.js
 import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { FaSignOutAlt, FaUtensils } from 'react-icons/fa';
 import { useRequireRestaurantAuth } from './useRestaurantAuth';
@@ -36,9 +36,11 @@ function RestaurantShell({ children, title, subtitle }) {
         <div className="restaurant-page">
             <header className="restaurant-header">
                 <div>
-                    <h1 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <FaUtensils style={{ color: 'var(--primary)' }} /> {title}
-                    </h1>
+                    <Link to="/restaurant" style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <h1 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <FaUtensils style={{ color: 'var(--primary)' }} /> {title}
+                        </h1>
+                    </Link>
                     {subtitle && <p className="section-subtitle">{subtitle}</p>}
                 </div>
                 <nav className="restaurant-nav">
@@ -54,6 +56,9 @@ function RestaurantShell({ children, title, subtitle }) {
                     ))}
                 </nav>
                 <div className="restaurant-userbar">
+                    <Link to="/restaurant/queue" className="btn-modern btn-outline-modern" style={{ textDecoration: 'none', lineHeight: '1.4' }}>
+                        Order Queue
+                    </Link>
                     <span className="user-chip">
                         👤 {user.name}
                         <span className="role-badge">{user.role}</span>

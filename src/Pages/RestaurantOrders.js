@@ -3,9 +3,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { FaUtensils } from 'react-icons/fa';
+import { FaUtensils, FaLock } from 'react-icons/fa';
 import RestaurantShell from '../restaurant/RestaurantShell';
 import { serveOrder, startBilling } from '../restaurant/restaurantActions';
+import { can } from '../restaurant/useRestaurantAuth';
 import { orderStatusLabel } from '../restaurant/restaurantSelectors';
 
 const COLUMNS = [
@@ -15,7 +16,7 @@ const COLUMNS = [
     { key: 'served', label: 'Served' }
 ];
 
-function OrderCard({ order, onServe }) {
+function OrderCard({ order, onServe, showServe }) {
     return (
         <div className="order-card">
             <div className="order-card-title">
@@ -32,7 +33,7 @@ function OrderCard({ order, onServe }) {
                 ))}
             </div>
             <div className="order-card-footer">
-                {order.status === 'ready' && (
+                {order.status === 'ready' && showServe && (
                     <button className="btn-modern btn-primary-modern" onClick={() => onServe(order)}>
                         <FaUtensils /> Serve Order
                     </button>
@@ -44,10 +45,15 @@ function OrderCard({ order, onServe }) {
 
 function RestaurantOrders() {
     const restaurant = useSelector(state => state.restaurant);
+    const user = useSelector(state => state.restaurant.currentUser);
     const dispatch = useDispatch();
+
+    const showServe = can(user, 'serveOrder');
+    const canBill = can(user, 'billing');
 
     const handleServe = (order) => {
         dispatch(serveOrder(order.id));
+        toast.success(`Order #${order.number} served — table ${order.tableNumber} is ready for billing.`);
     };
 
     const handleBill = (tableId) => {
@@ -74,7 +80,7 @@ function RestaurantOrders() {
                                 <div className="empty-note" style={{ padding: '1.2rem 0.5rem' }}>Nothing here</div>
                             ) : (
                                 orders.map(order => (
-                                    <OrderCard key={order.id} order={order} onServe={handleServe} />
+                                    <OrderCard key={order.id} order={order} onServe={handleServe} showServe={showServe} />
                                 ))
                             )}
                         </div>
@@ -93,14 +99,18 @@ function RestaurantOrders() {
                                 return `Table ${t.number}`;
                             }).join(', ')}
                         </div>
-                        {servedTables.map(tid => {
-                            const t = restaurant.tables.find(tbl => tbl.id === tid);
-                            return (
-                                <Link key={tid} to={`/restaurant/billing/${tid}`} className="btn-modern btn-outline-modern" style={{ textDecoration: 'none', lineHeight: '1.4' }} onClick={() => handleBill(tid)}>
-                                    Bill Table {t.number}
-                                </Link>
-                            );
-                        })}
+                        {canBill ? (
+                            servedTables.map(tid => {
+                                const t = restaurant.tables.find(tbl => tbl.id === tid);
+                                return (
+                                    <Link key={tid} to={`/restaurant/billing/${tid}`} className="btn-modern btn-outline-modern" style={{ textDecoration: 'none', lineHeight: '1.4' }} onClick={() => handleBill(tid)}>
+                                        Bill Table {t.number}
+                                    </Link>
+                                );
+                            })
+                        ) : (
+                            <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}><FaLock /> Ask the Cashier or Admin to generate the bill.</span>
+                        )}
                     </div>
                 </>
             )}

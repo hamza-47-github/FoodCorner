@@ -46,3 +46,20 @@ export function useRequireRestaurantAuth() {
 }
 
 export const hasRole = (user, allowed) => !allowed || (user && allowed.includes(user.role));
+
+// Role-wise permissions for the restaurant module.
+// Admin is a superuser on everything EXCEPT placing orders (waiters only).
+export const PERMISSIONS = {
+    placeOrder: ['Waiter'],
+    serveOrder: ['Waiter', 'Admin'],
+    kitchenWork: ['Kitchen Staff', 'Admin'],
+    billing: ['Admin', 'Cashier'],
+    payment: ['Admin', 'Cashier'],
+    history: ['Admin', 'Cashier']
+};
+
+export const can = (user, perm) => {
+    if (!user) return false;
+    const allowed = PERMISSIONS[perm];
+    return !allowed || allowed.includes(user.role);
+};

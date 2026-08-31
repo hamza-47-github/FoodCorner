@@ -52,7 +52,7 @@ const Layout = ({ children }) => {
     <div className="app-shell">
       <nav className="topbar">
         <div className="topbar-inner">
-          <Link className="brand" to="/">
+          <Link className="brand" to="/restaurant" title="Open Restaurant Dashboard">
             <span className="brand-icon">
               <FaUtensils />
             </span>

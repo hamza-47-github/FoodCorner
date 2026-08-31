@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { FaMoneyBillWave, FaCreditCard, FaCheckCircle, FaReceipt } from 'react-icons/fa';
+import { FaMoneyBillWave, FaCreditCard, FaCheckCircle, FaReceipt, FaLock } from 'react-icons/fa';
 import { formatPKR } from '../utils/format';
 import RestaurantShell from '../restaurant/RestaurantShell';
 import { startBilling, payBill } from '../restaurant/restaurantActions';
+import { can } from '../restaurant/useRestaurantAuth';
 import { unpaidBillForTable } from '../restaurant/restaurantSelectors';
 
 function BillTable({ bill }) {
@@ -36,6 +37,7 @@ function RestaurantBilling() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const restaurant = useSelector(state => state.restaurant);
+    const user = useSelector(state => state.restaurant.currentUser);
 
     const table = restaurant.tables.find(t => t.id === tableId);
     const bill = unpaidBillForTable(restaurant, tableId) || null;
@@ -43,6 +45,22 @@ function RestaurantBilling() {
 
     const [method, setMethod] = useState('Cash');
     const [received, setReceived] = useState('');
+
+    if (!can(user, 'billing')) {
+        return (
+            <RestaurantShell title="Billing">
+                <div className="empty-note">
+                    <div style={{ fontSize: '2rem', marginBottom: '0.4rem' }}><FaLock /></div>
+                    Only <strong>Cashier</strong> or <strong>Admin</strong> can generate bills and take payment.
+                    <div style={{ marginTop: '0.9rem' }}>
+                        <Link to="/restaurant/login" className="btn-modern btn-primary-modern" style={{ textDecoration: 'none', lineHeight: '1.4' }}>
+                            Login as Cashier
+                        </Link>
+                    </div>
+                </div>
+            </RestaurantShell>
+        );
+    }
 
     if (!table) {
         return (
